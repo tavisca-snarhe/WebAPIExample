@@ -4,28 +4,28 @@ pipeline {
     stages {
 	stage('Restore') {
             steps {
-                sh "dotnet restore"
+                bat "dotnet restore"
             }
         }
         stage('Build') {
             steps {
-                sh "dotnet build -p:Configuration=release -v:n"
+                bat "dotnet build -p:Configuration=release -v:n"
             }
         }
         stage('Test') {
             steps {
-                sh "dotnet test"
+                bat "dotnet test"
             }
         }
 	stage('publish') {
             steps {
-                sh "dotnet publish"
-		sh "zip -r artifact.zip WebAPIExample/bin/Release/netcoreapp2.2/"
+                bat "dotnet publish"
+		bat "zip -r artifact.zip WebAPIExample/bin/Release/netcoreapp2.2/"
             }
         }
 	stage('run') {
             steps {
-                sh "dotnet WebAPIExample/bin/Release/netcoreapp2.2/WebAPIExample.dll"
+                bat "dotnet WebAPIExample/bin/Release/netcoreapp2.2/WebAPIExample.dll"
             }
         }
     }
