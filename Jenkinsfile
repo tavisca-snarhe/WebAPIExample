@@ -20,7 +20,6 @@ pipeline {
 	stage('publish') {
             steps {
                 bat "dotnet publish"
-		bat "zip -r artifact.zip WebAPIExample/bin/Release/netcoreapp2.2/"
             }
         }
 	stage('run') {
