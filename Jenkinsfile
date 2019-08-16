@@ -28,7 +28,7 @@ pipeline {
             }
         }
         stage('run_docker_image') {
-            steps {s
+            steps {
                 bat "docker run --rm -it -p 8001:8001/tcp webapi:latest"
             }
         }
