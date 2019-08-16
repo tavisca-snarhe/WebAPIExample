@@ -4,6 +4,6 @@ WORKDIR app
 
 COPY WebAPIExample/bin/Release/netcoreapp2.2 .
 
-EXPOSE 8001
+EXPOSE 8004
 
 ENTRYPOINT ["dotnet", "WebAPIExample.dll"]
