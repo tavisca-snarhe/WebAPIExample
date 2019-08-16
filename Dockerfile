@@ -4,6 +4,6 @@ COPY WebAPIExample/bin/Release/PublishOutput .
 
 WORKDIR .
 
-EXPOSE 12345
+EXPOSE 8001
 
 ENTRYPOINT ["dotnet", "WebAPIExample.dll"]
