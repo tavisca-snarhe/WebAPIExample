@@ -9,7 +9,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                bat "dotnet build -p:Configuration=release -v:n"
+                bat "dotnet build -p:Configuration=Release -v:n"
             }
         }
         stage('Test') {
@@ -19,7 +19,7 @@ pipeline {
         }
         stage('publish') {
             steps {
-                bat "dotnet publish"
+                bat "dotnet publish -c Release -o Publish"
             }
         }
         stage('create_docker_image') {
