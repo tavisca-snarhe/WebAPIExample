@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-	stage('Restore') {
+	    stage('Restore') {
             steps {
                 bat "dotnet restore"
             }
@@ -17,14 +17,19 @@ pipeline {
                 bat "dotnet test"
             }
         }
-	stage('publish') {
+        stage('publish') {
             steps {
                 bat "dotnet publish"
             }
         }
-	stage('run') {
+        stage('create_docker_image') {
             steps {
-                bat "dotnet WebAPIExample/bin/Release/netcoreapp2.2/WebAPIExample.dll"
+                bat "docker build -t webapi -f dockerfile ."
+            }
+        }
+        stage('run_docker_image') {
+            steps {s
+                bat "docker run --rm -it -p 8001:8001/tcp webapi:latest"
             }
         }
     }
