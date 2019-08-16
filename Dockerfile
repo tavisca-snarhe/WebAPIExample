@@ -1,8 +1,8 @@
-FROM mcr.microsoft.com/dotnet/core/sdk
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.2
+
+WORKDIR app
 
 COPY WebAPIExample/bin/Release/PublishOutput .
-
-WORKDIR .
 
 EXPOSE 8001
 
