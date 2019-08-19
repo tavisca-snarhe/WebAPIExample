@@ -1,8 +1,14 @@
 pipeline {
     agent any
-
     stages {
-	    stage('Restore') {
+	    stage('Checkout') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: "*/${GIT_BRANCH}" ]],
+                doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], 
+                userRemoteConfigs: [[url: "${GIT_URL}" ]]])
+            }
+        }
+        stage('Restore') {
             steps {
                 bat "dotnet restore"
             }
@@ -25,6 +31,8 @@ pipeline {
         stage('deploy') {
             steps {
                 bat "docker build -t webapi -f dockerfile ."
+                bat "docker tag webapi saurabhnarhe123/webapi"
+                bat "docker push saurabhnarhe123/webapi"
                 bat "docker run --rm -p 8004:8004/tcp webapi:latest"
             }
         }
